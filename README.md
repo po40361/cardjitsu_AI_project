@@ -1,0 +1,1 @@
+# cardjitsu_AI_project
