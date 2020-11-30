@@ -1,0 +1,6 @@
+Training episodes: 10000
+Weights:
+     enemy-distance-to-closest-win 39.988241565561864 
+     agent-distance-to-closest-win -34.92615841389641 
+     agent-went-closer-to-win 49.64655402625998 
+     agent-can-block-enemy-advancement 81.11910821037583 

@@ -1,0 +1,7 @@
+Training episodes: 10000000
+Weights:
+     enemy-distance-to-closest-win 1.3999995454998298e-06 
+     agent-distance-to-closest-win 1.299999463999758e-06 
+
+
+self, name, epsilon=1, gamma=0.8, alpha=0.5, numTraining=0

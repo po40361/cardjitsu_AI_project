@@ -1,7 +1,9 @@
 # from main import judgeThreeOfAKind, judgeStreak
 import unittest
 
-from agents import GreedyAgent
+from agents import GreedyAgent, Player
+from featureExtractor import FeatureExtractor
+from gameState import GameState
 # from gameState import judgeThreeOfAKind, judgeStreak
 
 # class TestJudgeMethods(unittest.TestCase):
@@ -44,8 +46,29 @@ class TestGreedyAgent(unittest.TestCase):
         greedyAgent = GreedyAgent("greedy")
         greedyAgent.cards = [(3, "Fire"), (3, "Ice"), (3, "Water")]
         
+class TestFeatureExtractor(unittest.TestCase):
+    def testExtration(self):
+        featureExt = FeatureExtractor()
+        agent = Player("aql agent")
+        enemy = Player("greedy agent")
+        gameState = GameState(agent, enemy)
+        enemy.accumulatedCards["Water"] += 1
+        enemy.accumulatedCards["Fire"] += 1
+        features = featureExt.getFeatures(gameState, "action", agent.name)
+        self.assertEqual(features["enemy-distance-to-closest-win"], 1)
+        self.assertEqual(features["agent-distance-to-closest-win"], 4)
+
+        agent.cards.append((1, "Water"))
+        enemy.accumulatedCards["Fire"] -= 1
+        enemy.accumulatedCards["Water"] += 1
+
+        features = featureExt.getFeatures(gameState, "action", agent.name)
+        self.assertEqual(features["agent-distance-to-closest-win"], 3)
+        self.assertEqual(features["enemy-distance-to-closest-win"], 1)
 
 
 
-suite = unittest.TestLoader().loadTestsFromTestCase(TestGreedyAgent)
+
+
+suite = unittest.TestLoader().loadTestsFromTestCase(TestFeatureExtractor)
 unittest.TextTestRunner(verbosity=2).run(suite)
